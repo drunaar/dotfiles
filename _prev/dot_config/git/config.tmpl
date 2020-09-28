@@ -1,12 +1,20 @@
 [user]
   name = {{ .name }}
   email = {{ .email }}
+
 [core]
   autocrlf = false
   editor = micro
   longpaths = true
+
+{{ if .proxy.http -}}
+[http]
+  proxy = {{ .proxy.http }}
+{{ end -}}
+
 [merge]
   ff = false
+
 [pull]
   ff = only
   rebase = true
