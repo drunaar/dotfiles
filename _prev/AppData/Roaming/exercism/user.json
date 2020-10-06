@@ -1,7 +1,5 @@
-{{- if eq .profile "default" }}
 {
   "apibaseurl": "https://api.exercism.io/v1",
   "token": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "workspace": "d:\\workspaces\\playgrounds\\exercism"
 }
-{{- end }}

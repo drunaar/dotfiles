@@ -1,0 +1,3 @@
+{{- if ne .profile "default" }}
+exercism
+{{- end }}
