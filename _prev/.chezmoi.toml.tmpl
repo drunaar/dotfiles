@@ -6,6 +6,7 @@ sourceDir = '{{ .chezmoi.sourceDir }}'
   options = ['missingkey=default']
 
 [data]
+  profile = '{{ $profile }}'
   name = 'Alexey Zudenkov'
 {{- if eq $profile "@bcs" }}
   email = 'azudenkov@bcsgm.com'
