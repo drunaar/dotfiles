@@ -1,0 +1,18 @@
+{{- $profile := hasPrefix "BCSPRIME\\" .chezmoi.username | ternary "@bcs" "" -}}
+{{- $profile := empty $profile | ternary "default" $profile -}}
+sourceDir = '{{ .chezmoi.sourceDir }}'
+
+[template]
+  options = ['missingkey=default']
+
+[data]
+  profile = '{{ $profile }}'
+  name = 'Alexey Zudenkov'
+{{- if eq $profile "@bcs" }}
+  email = 'azudenkov@bcsgm.com'
+  proxy = {
+    http = 'http://dcix-freeproxy.bcsprime.local:3128'
+  }
+{{- else }}
+  email = 'drunaar@gmail.com'
+{{- end }}
