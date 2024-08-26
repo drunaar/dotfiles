@@ -1,0 +1,21 @@
+{{/* chezmoi:template:line-endings=lf */}}
+{{/* chezmoi:modify-template */}}
+{{ with .chezmoi.stdin -}}
+{{ $cacheDir := coalesce (env "XDG_CACHE_HOME") (expandenv "$USERPROFILE\\.cache") -}}
+{{ $config := . | fromJson
+    | setValueAtPath "root_path" (expandenv "$USERPROFILE\\.scoop")
+    | setValueAtPath "cache_path" (print $cacheDir "\\scoop") -}}
+
+{{ $leadingKeys := list "root_path" "cache_path" -}}
+{{ $trailingKeys := list "scoop_repo" "scoop_branch" -}}
+{{ $restKeys := $config | keys -}}
+{{ range $key := concat $leadingKeys $trailingKeys -}}
+  {{ $restKeys = without $restKeys $key }}{{ end -}}
+
+{
+{{ range $index, $key := concat $leadingKeys $restKeys $trailingKeys }}
+{{- indent 2 (printf "%v: %v%v" ($key | toJson) (get $config $key | toJson)
+      (ne (add 1 $index) (len $config) | ternary "," "")) }}
+{{ end -}}
+}
+{{ end -}}

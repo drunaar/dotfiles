@@ -1,5 +1,6 @@
 #!/usr/bin/env powershell
 
+$cacheDir = $env:XDG_CACHE_HOME, "$env:USERPROFILE\.cache" | Select-Object -First 1
 $prerequisites = @{
   buckets = 'main', 'extras'
   apps    = (
@@ -9,7 +10,7 @@ $prerequisites = @{
 }
 
 if (!(Get-Command scoop -ErrorAction SilentlyContinue) -and !(Test-Path ~/.scoop/shims)) {
-  Invoke-Expression "&{$(Invoke-RestMethod 'https://get.scoop.sh')} -ScoopDir $env:USERPROFILE\.scoop"
+  Invoke-Expression "&{$(Invoke-RestMethod 'https://get.scoop.sh')} -ScoopDir $env:USERPROFILE\.scoop -ScoopCacheDir $cacheDir\scoop"
   scoop install main/git
   scoop update
 }
