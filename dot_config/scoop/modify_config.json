@@ -1,4 +1,3 @@
-{{/* chezmoi:template:line-endings=lf */}}
 {{/* chezmoi:modify-template */}}
 {{ with .chezmoi.stdin -}}
 {{ $cacheDir := coalesce (env "XDG_CACHE_HOME") (expandenv "$USERPROFILE\\.cache") -}}
@@ -14,7 +13,7 @@
 
 {
 {{ range $index, $key := concat $leadingKeys $restKeys $trailingKeys }}
-{{- indent 2 (printf "%v: %v%v" ($key | toJson) (get $config $key | toJson)
+{{- indent 4 (printf "%v:  %v%v" ($key | toJson) (get $config $key | toJson)
       (ne (add 1 $index) (len $config) | ternary "," "")) }}
 {{ end -}}
 }
