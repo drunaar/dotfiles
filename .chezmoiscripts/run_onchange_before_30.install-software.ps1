@@ -6,7 +6,12 @@ $softwareToInstall = @{
     'extras/windows-terminal',
     'main/pwsh',
     'main/nu',
-    'main/oh-my-posh'
+    'main/oh-my-posh',
+    # -- essentials
+    'main/scoop-search',
+    'main/micro',
+    'main/bat',
+    'main/delta'
   )
   winget = @()
 }
