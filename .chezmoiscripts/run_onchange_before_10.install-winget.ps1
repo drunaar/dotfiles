@@ -15,6 +15,10 @@ if (!(Get-Command winget -ErrorAction SilentlyContinue)) {
     if (!(Test-Path $dst -PathType Leaf)) {
       Start-BitsTransfer -Source $src -Destination $dst
     }
-    Add-AppxPackage $dst
   }
+
+  $msixBundle = Join-Path $cacheDir ($packages | Where-Object { $_[1] -like '*.msixbundle' } | Select-Object -First 1)[1]
+  $dependencies = $packages | Where-Object { $_[1] -like '*.appx' } | ForEach-Object { Join-Path $cacheDir $_[1] }
+  
+  Add-AppxPackage  $msixBundle -DependencyPath $dependencies
 }
