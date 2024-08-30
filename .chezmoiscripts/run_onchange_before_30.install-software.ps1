@@ -1,5 +1,7 @@
 #!/usr/bin/env powershell
 
+$env:path += "$env:USERPROFILE\.scoop\shims;"
+
 $softwareToInstall = @{
   scoop = (
     # -- terminal & shells
