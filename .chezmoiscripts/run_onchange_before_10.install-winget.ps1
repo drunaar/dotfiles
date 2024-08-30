@@ -21,4 +21,6 @@ if (!(Get-Command winget -ErrorAction SilentlyContinue)) {
   $dependencies = $packages | Where-Object { $_[1] -like '*.appx' } | ForEach-Object { Join-Path $cacheDir $_[1] }
   
   Add-AppxPackage  $msixBundle -DependencyPath $dependencies
+
+  winget list --accept-source-agreements | Out-Null
 }
