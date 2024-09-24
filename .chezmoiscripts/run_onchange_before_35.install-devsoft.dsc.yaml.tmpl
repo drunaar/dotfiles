@@ -1,0 +1,38 @@
+#!winget configure --accept-configuration-agreements
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  resources:
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: pkgVSCode
+    directives:
+      description: Install VS Code
+      allowPrerelease: true
+    settings:
+      id: Microsoft.VisualStudioCode
+      source: winget
+  - resource: Microsoft.WinGet.DSC/WinGetPackage
+    id: pkgAzureDataStudio
+    directives:
+      description: Install Azure Data Studio
+      allowPrerelease: true
+    settings:
+      id: Microsoft.AzureDataStudio
+      source: winget
+{{- range $extension := list
+    "mhutchie.git-graph"
+    "ms-dotnettools.csharp"
+    "ms-dotnettools.vscode-dotnet-runtime"
+    "ms-dotnettools.csdevkit"
+    "ms-dotnettools.vscodeintellicode-csharp"
+    "ms-vscode-remote.vscode-remote-extensionpack"
+    "ms-vscode.remote-repositories"
+    "ms-vscode.powershell" }}
+  - resource: Microsoft.VSCode.DSC/VSCodeExtension
+    dependsOn:
+    - pkgVSCode
+    directives:
+      allowPrerelease: true
+    settings:
+      name: {{ $extension -}}
+{{ end }}
+  configurationVersion: 0.2.0
