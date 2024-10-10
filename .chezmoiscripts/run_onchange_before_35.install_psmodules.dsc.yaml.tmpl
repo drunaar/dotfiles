@@ -1,0 +1,23 @@
+#!winget configure --accept-configuration-agreements
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  resources:
+  - resource: Script
+    id: entrustRepository
+    settings:
+      getScript: "% 'no-op'"
+      setScript: "Set-PSRepository PSGallery -InstallationPolicy Trusted"
+      testScript: "(Get-PSRepository PSGallery).InstallationPolicy -eq 'Trusted'"
+{{- range $module := list
+    "PSScriptTools" }}
+  - resource: PowerShellModule/PSModuleResource
+    dependsOn: [ entrustRepository ]
+    directives:
+      description: PowerShell module
+      allowPrerelease: true
+    settings:
+      module_name: {{ $module }}
+      # allowclobber: true
+      installscope: currentuser
+{{- end }}
+  configurationVersion: 0.2.0
