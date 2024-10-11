@@ -1,3 +1,10 @@
+{{/*  regarding to this issue we should use pwsh, if possible
+      https://github.com/PowerShell/PowerShell/issues/18108  */}}
+{{- if lookPath "pwsh" -}}
+[interpreters.ps1]
+  command = "pwsh"
+  args = ["-nologo"]
+{{ end -}}
 [interpreters.yaml]
   command = {{ joinPath .chezmoi.sourceDir "Win-ScriptInvoke.cmd" | quote }}
   args = ["--"]
