@@ -13,11 +13,12 @@ properties:
   - resource: Microsoft.WinGet.DSC/WinGetPackage
     id: pkgAzureDataStudio
     directives:
-      description: Install Azure Data Studio
+      description: Ensure that deprecated Azure Data Studio is not installed
       allowPrerelease: true
     settings:
       id: Microsoft.AzureDataStudio
       source: winget
+      ensure: absent
 {{- range $extension := list
     "mhutchie.git-graph"
     "ms-dotnettools.csharp"
