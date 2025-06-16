@@ -1,6 +1,6 @@
 #!/usr/bin/env powershell
 
-$env:path += "$env:USERPROFILE\.scoop\shims;"
+$env:path += ";$env:USERPROFILE\.scoop\shims;"
 $cacheDir = $env:XDG_CACHE_HOME, "$env:USERPROFILE\.cache" | Select-Object -First 1
 $cacheDir = Join-Path $cacheDir 'bootstrap'
 
