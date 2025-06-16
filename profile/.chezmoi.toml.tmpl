@@ -6,5 +6,5 @@
   args = ["-nologo"]
 {{ end -}}
 [interpreters.yaml]
-  command = {{ joinPath .chezmoi.sourceDir "Win-ScriptInvoke.cmd" | quote }}
+  command = {{ joinPath .chezmoi.workingTree "Win-ScriptInvoke.cmd" | quote }}
   args = ["--"]
