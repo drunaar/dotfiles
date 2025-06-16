@@ -13,6 +13,7 @@ if (!(Get-Command scoop -ErrorAction SilentlyContinue) -and !(Test-Path ~/.scoop
   Invoke-Expression "&{$(Invoke-RestMethod 'https://get.scoop.sh')} -ScoopDir $env:USERPROFILE\.scoop -ScoopCacheDir $cacheDir\scoop"
   scoop install main/git
   scoop update
+  scoop config use_lessmsi true
 }
 
 $currentState = scoop export | ConvertFrom-Json
