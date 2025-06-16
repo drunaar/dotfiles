@@ -21,21 +21,21 @@ $softwareToInstall = @{
   )
   appx = (
     # -- terminal & shells
-    ('https://github.com/microsoft/terminal/releases/download/v1.21.2361.0/Microsoft.WindowsTerminal_1.21.2361.0_8wekyb3d8bbwe.msixbundle', 'Microsoft.WindowsTerminal_1.21.2361.0_8wekyb3d8bbwe.msixbundle', 'wt'),
-    ('https://github.com/PowerShell/PowerShell/releases/download/v7.4.5/PowerShell-7.4.5-win.msixbundle', 'PowerShell-7.4.5-win.msixbundle', 'pwsh')
+    ('https://github.com/microsoft/terminal/releases/download/v1.22.11141.0/Microsoft.WindowsTerminal_1.22.11141.0_8wekyb3d8bbwe.msixbundle', 'Microsoft.WindowsTerminal_1.22.11141.0_8wekyb3d8bbwe.msixbundle', 'wt'),
+    ('https://github.com/PowerShell/PowerShell/releases/download/v7.5.0/PowerShell-7.5.0-win.msixbundle', 'PowerShell-7.5.0-win.msixbundle', 'pwsh')
   )
   winget = @()
 }
 
 New-Item $cacheDir -ItemType Directory -Force | Out-Null
 
-$softwareToInstall.appx | ForEach-Object { 
+$softwareToInstall.appx | ForEach-Object {
   ($src, $dst, $cmd) = ($_[0], (Join-Path $cacheDir $_[1]), $_[2])
   if (!(Test-Path $dst -PathType Leaf)) {
     Start-BitsTransfer -Source $src -Destination $dst
   }
 
-  if (!(Get-Command $cmd -ErrorAction SilentlyContinue)) { 
+  if (!(Get-Command $cmd -ErrorAction SilentlyContinue)) {
     Add-AppxPackage $dst
   }
 }
