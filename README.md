@@ -5,5 +5,5 @@ Personal application configuration and settings (dotfiles), managed with [`chezm
 ## Installation
 
 ```powershell
-iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b ~/.local/bin -- init --apply drunaar"
+iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b $env:TEMP -- init --apply drunaar"
 ```
